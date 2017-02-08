@@ -1,0 +1,1 @@
+Git-ting more efficient section, with Stash, ALiases, and GUI Clients for Git
