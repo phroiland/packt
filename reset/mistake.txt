@@ -1,0 +1,812 @@
+A new file
+
+Last login: Wed Feb  8 09:17:47 on ttys000
+C02S81V1G8WM:~ johnfroiland$ cd packt
+C02S81V1G8WM:packt johnfroiland$ git version
+git version 2.10.1 (Apple Git-78)
+C02S81V1G8WM:packt johnfroiland$ ca .git/head
+-bash: ca: command not found
+C02S81V1G8WM:packt johnfroiland$ ca .git/HEAD
+-bash: ca: command not found
+C02S81V1G8WM:packt johnfroiland$ cat .git/HEAD
+ref: refs/heads/master
+C02S81V1G8WM:packt johnfroiland$ cat .git/refs/heads/master
+6d16819556ffc373629c784ffa16eb07b6ee3cae
+C02S81V1G8WM:packt johnfroiland$ echo "Exploring the Feature Branch" >> branching.txt
+C02S81V1G8WM:packt johnfroiland$ git add branching.txt
+C02S81V1G8WM:packt johnfroiland$ git commit -m "We branched here"
+[master 9a56bc3] We branched here
+ 1 file changed, 1 insertion(+)
+ create mode 100644 branching.txt
+C02S81V1G8WM:packt johnfroiland$ git branchnewUI
+git: 'branchnewUI' is not a git command. See 'git --help'.
+C02S81V1G8WM:packt johnfroiland$ git branch newUI
+C02S81V1G8WM:packt johnfroiland$ git branch
+* master
+  newUI
+C02S81V1G8WM:packt johnfroiland$ git checkout newUI
+Switched to branch 'newUI'
+C02S81V1G8WM:packt johnfroiland$ git branch
+  master
+* newUI
+C02S81V1G8WM:packt johnfroiland$  echo 'body { padding: none; margin: none; }' >> default.css
+C02S81V1G8WM:packt johnfroiland$ git add default.css
+C02S81V1G8WM:packt johnfroiland$ git commit -m "Beginning of new CSS retructure"
+[newUI e4d8295] Beginning of new CSS retructure
+ 1 file changed, 1 insertion(+)
+ create mode 100644 default.css
+C02S81V1G8WM:packt johnfroiland$ git checkout master
+Switched to branch 'master'
+C02S81V1G8WM:packt johnfroiland$ git checkout -b hotfix
+Switched to a new branch 'hotfix'
+C02S81V1G8WM:packt johnfroiland$ git branch
+* hotfix
+  master
+  newUI
+C02S81V1G8WM:packt johnfroiland$ vi branching.txt
+C02S81V1G8WM:packt johnfroiland$ git rm git*
+rm 'gitAdd'
+rm 'gitStatus'
+C02S81V1G8WM:packt johnfroiland$ git status -sb
+## hotfix
+ M branching.txt
+D  gitAdd
+D  gitStatus
+?? explore/
+C02S81V1G8WM:packt johnfroiland$ git commit -m "Completed hotfix"
+[hotfix f6c93f3] Completed hotfix
+ 2 files changed, 1 deletion(-)
+ delete mode 100644 gitAdd
+ delete mode 100644 gitStatus
+C02S81V1G8WM:packt johnfroiland$ git checkout
+M	branching.txt
+C02S81V1G8WM:packt johnfroiland$ git checkout master
+M	branching.txt
+Switched to branch 'master'
+C02S81V1G8WM:packt johnfroiland$ git merge hotfix
+Updating 9a56bc3..f6c93f3
+Fast-forward
+ gitAdd    | 0
+ gitStatus | 1 -
+ 2 files changed, 1 deletion(-)
+ delete mode 100644 gitAdd
+ delete mode 100644 gitStatus
+C02S81V1G8WM:packt johnfroiland$ git checkout newUI
+M	branching.txt
+Switched to branch 'newUI'
+C02S81V1G8WM:packt johnfroiland$ git branch -d hotfix
+error: The branch 'hotfix' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D hotfix'.
+C02S81V1G8WM:packt johnfroiland$ git status
+On branch newUI
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   branching.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	explore/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+C02S81V1G8WM:packt johnfroiland$ cat branching.txt
+Exploring the Feature Branch
+
+Some text
+C02S81V1G8WM:packt johnfroiland$ git branch -D hotfix
+Deleted branch hotfix (was f6c93f3).
+C02S81V1G8WM:packt johnfroiland$ mkdir branching
+C02S81V1G8WM:packt johnfroiland$ cd branching
+C02S81V1G8WM:branching johnfroiland$ touch branching.txt
+C02S81V1G8WM:branching johnfroiland$ vi branching.txt 
+C02S81V1G8WM:branching johnfroiland$ open branching.txt 
+C02S81V1G8WM:branching johnfroiland$ git add branching.txt
+C02S81V1G8WM:branching johnfroiland$ git commit -m "Notes from Branching"
+[newUI 5dcaa42] Notes from Branching
+ 1 file changed, 101 insertions(+)
+ create mode 100644 branching/branching.txt
+C02S81V1G8WM:branching johnfroiland$ git log
+commit 5dcaa4231018ed30af5e546aaf430e2b40fdcdca
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Wed Feb 8 13:37:08 2017 -0500
+
+    Notes from Branching
+
+commit e4d829541b338c19042c5c3812c210f2be6b589a
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Wed Feb 8 13:28:46 2017 -0500
+
+    Beginning of new CSS retructure
+
+commit 9a56bc3ae6eaa5a0ec52d0b680d19b49f97a0178
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Wed Feb 8 13:25:50 2017 -0500
+
+    We branched here
+
+commit 6d16819556ffc373629c784ffa16eb07b6ee3cae
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 15:25:57 2017 -0500
+
+    Updates to file go to bottom of file.
+
+commit 7d14a0dabe149aa9ea6a7d09b349ef9cd1fe35f4
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 15:23:11 2017 -0500
+
+    Added code to py file
+
+commit 04ad6e69e7927ce0b2a71222aebe5faef0102696
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 15:15:49 2017 -0500
+
+    Attempting to write and add code from command line
+
+commit f61fb7f5a858750325aad09f32f4b653d86f53d7
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 14:36:03 2017 -0500
+
+    Updated README
+
+commit 6a2bec50fda43a0ffcf96ed786e850a628da302f
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 14:27:01 2017 -0500
+
+    Used dash A
+
+commit c86e700ff477d6ae1449df323f1c5f712de82cca
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 14:24:07 2017 -0500
+
+    Staging Exercise
+
+commit 57d647503d8b8dd94dd165a2b35f5efe7bed87ea
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 14:18:00 2017 -0500
+
+    Personal Notes on Git
+C02S81V1G8WM:branching johnfroiland$ ls
+branching.txt
+C02S81V1G8WM:branching johnfroiland$ cd ..
+C02S81V1G8WM:packt johnfroiland$ git remote add origin https"//https://github.com/phroiland
+> "
+C02S81V1G8WM:packt johnfroiland$ git remote add origin https://github.com/phroiland
+fatal: remote origin already exists.
+C02S81V1G8WM:packt johnfroiland$ git remote add origin https://github.com/phroiland/packy
+fatal: remote origin already exists.
+C02S81V1G8WM:packt johnfroiland$ git remote add origin https://github.com/phroiland/packt
+fatal: remote origin already exists.
+C02S81V1G8WM:packt johnfroiland$ git remote -v
+origin	https//https://github.com/phroiland
+ (fetch)
+origin	https//https://github.com/phroiland
+ (push)
+C02S81V1G8WM:packt johnfroiland$ git remote add origin https://github.com/phroiland/packt.git
+fatal: remote origin already exists.
+C02S81V1G8WM:packt johnfroiland$ git remote --add remote_name  https://github.com/phroiland/packt.git
+error: unknown option `add'
+usage: git remote [-v | --verbose]
+   or: git remote add [-t <branch>] [-m <master>] [-f] [--tags | --no-tags] [--mirror=<fetch|push>] <name> <url>
+   or: git remote rename <old> <new>
+   or: git remote remove <name>
+   or: git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
+   or: git remote [-v | --verbose] show [-n] <name>
+   or: git remote prune [-n | --dry-run] <name>
+   or: git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)...]
+   or: git remote set-branches [--add] <name> <branch>...
+   or: git remote get-url [--push] [--all] <name>
+   or: git remote set-url [--push] <name> <newurl> [<oldurl>]
+   or: git remote set-url --add <name> <newurl>
+   or: git remote set-url --delete <name> <url>
+
+    -v, --verbose         be verbose; must be placed before a subcommand
+
+C02S81V1G8WM:packt johnfroiland$ git remote add remote_name  https://github.com/phroiland/packt.git
+C02S81V1G8WM:packt johnfroiland$ git remote -v
+origin	https//https://github.com/phroiland
+ (fetch)
+origin	https//https://github.com/phroiland
+ (push)
+remote_name	https://github.com/phroiland/packt.git (fetch)
+remote_name	https://github.com/phroiland/packt.git (push)
+C02S81V1G8WM:packt johnfroiland$ git remote push  https://github.com/phroiland/packt.git
+error: Unknown subcommand: push
+usage: git remote [-v | --verbose]
+   or: git remote add [-t <branch>] [-m <master>] [-f] [--tags | --no-tags] [--mirror=<fetch|push>] <name> <url>
+   or: git remote rename <old> <new>
+   or: git remote remove <name>
+   or: git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
+   or: git remote [-v | --verbose] show [-n] <name>
+   or: git remote prune [-n | --dry-run] <name>
+   or: git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)...]
+   or: git remote set-branches [--add] <name> <branch>...
+   or: git remote get-url [--push] [--all] <name>
+   or: git remote set-url [--push] <name> <newurl> [<oldurl>]
+   or: git remote set-url --add <name> <newurl>
+   or: git remote set-url --delete <name> <url>
+
+    -v, --verbose         be verbose; must be placed before a subcommand
+
+C02S81V1G8WM:packt johnfroiland$ git remote push https://github.com/phroiland/packt.git
+error: Unknown subcommand: push
+usage: git remote [-v | --verbose]
+   or: git remote add [-t <branch>] [-m <master>] [-f] [--tags | --no-tags] [--mirror=<fetch|push>] <name> <url>
+   or: git remote rename <old> <new>
+   or: git remote remove <name>
+   or: git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
+   or: git remote [-v | --verbose] show [-n] <name>
+   or: git remote prune [-n | --dry-run] <name>
+   or: git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)...]
+   or: git remote set-branches [--add] <name> <branch>...
+   or: git remote get-url [--push] [--all] <name>
+   or: git remote set-url [--push] <name> <newurl> [<oldurl>]
+   or: git remote set-url --add <name> <newurl>
+   or: git remote set-url --delete <name> <url>
+
+    -v, --verbose         be verbose; must be placed before a subcommand
+
+C02S81V1G8WM:packt johnfroiland$ git remote -v push https://github.com/phroiland/packt.git
+error: Unknown subcommand: push
+usage: git remote [-v | --verbose]
+   or: git remote add [-t <branch>] [-m <master>] [-f] [--tags | --no-tags] [--mirror=<fetch|push>] <name> <url>
+   or: git remote rename <old> <new>
+   or: git remote remove <name>
+   or: git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
+   or: git remote [-v | --verbose] show [-n] <name>
+   or: git remote prune [-n | --dry-run] <name>
+   or: git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)...]
+   or: git remote set-branches [--add] <name> <branch>...
+   or: git remote get-url [--push] [--all] <name>
+   or: git remote set-url [--push] <name> <newurl> [<oldurl>]
+   or: git remote set-url --add <name> <newurl>
+   or: git remote set-url --delete <name> <url>
+
+    -v, --verbose         be verbose; must be placed before a subcommand
+
+C02S81V1G8WM:packt johnfroiland$ git remote push
+error: Unknown subcommand: push
+usage: git remote [-v | --verbose]
+   or: git remote add [-t <branch>] [-m <master>] [-f] [--tags | --no-tags] [--mirror=<fetch|push>] <name> <url>
+   or: git remote rename <old> <new>
+   or: git remote remove <name>
+   or: git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
+   or: git remote [-v | --verbose] show [-n] <name>
+   or: git remote prune [-n | --dry-run] <name>
+   or: git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)...]
+   or: git remote set-branches [--add] <name> <branch>...
+   or: git remote get-url [--push] [--all] <name>
+   or: git remote set-url [--push] <name> <newurl> [<oldurl>]
+   or: git remote set-url --add <name> <newurl>
+   or: git remote set-url --delete <name> <url>
+
+    -v, --verbose         be verbose; must be placed before a subcommand
+
+C02S81V1G8WM:packt johnfroiland$ git push
+fatal: The current branch newUI has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin newUI
+
+C02S81V1G8WM:packt johnfroiland$ git push https://github.com/phroiland/packt.git
+Username for 'https://github.com': phroiland
+Password for 'https://phroiland@github.com': 
+remote: Repository not found.
+fatal: repository 'https://github.com/phroiland/packt.git/' not found
+C02S81V1G8WM:packt johnfroiland$ git fetch https://github.com/phroiland
+remote: Not Found
+fatal: repository 'https://github.com/phroiland/' not found
+C02S81V1G8WM:packt johnfroiland$ git clone  https://github.com/phroiland
+Cloning into 'phroiland'...
+remote: Not Found
+fatal: repository 'https://github.com/phroiland/' not found
+C02S81V1G8WM:packt johnfroiland$ git clone  https://www.github.com/phroiland
+Cloning into 'phroiland'...
+remote: Not Found
+fatal: repository 'https://github.com/phroiland/' not found
+C02S81V1G8WM:packt johnfroiland$ git clone https://github.com/phroiland/packt.git
+Cloning into 'packt'...
+warning: You appear to have cloned an empty repository.
+C02S81V1G8WM:packt johnfroiland$ git push https://github.com/phroiland/packt.git
+Username for 'https://github.com': phroiland
+Password for 'https://phroiland@github.com': 
+Counting objects: 32, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (23/23), done.
+Writing objects: 100% (32/32), 3.85 KiB | 0 bytes/s, done.
+Total 32 (delta 9), reused 0 (delta 0)
+remote: Resolving deltas: 100% (9/9), done.
+To https://github.com/phroiland/packt.git
+ * [new branch]      newUI -> newUI
+C02S81V1G8WM:packt johnfroiland$ mkdir future
+C02S81V1G8WM:packt johnfroiland$ cd future
+C02S81V1G8WM:future johnfroiland$ touch future.txt
+C02S81V1G8WM:future johnfroiland$ git add future.tt
+fatal: pathspec 'future.tt' did not match any files
+C02S81V1G8WM:future johnfroiland$ git add future.txt
+C02S81V1G8WM:future johnfroiland$ git commit -m "Overview of Git history, and how it represents decisions made along the way in the life of a project"
+[newUI deabb4b] Overview of Git history, and how it represents decisions made along the way in the life of a project
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 future/future.txt
+C02S81V1G8WM:future johnfroiland$ ls
+future.txt
+C02S81V1G8WM:future johnfroiland$ git log --graph
+* commit deabb4be2c18928b8a15be17b8d9d4bb5ead70ba
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Wed Feb 8 13:58:39 2017 -0500
+| 
+|     Overview of Git history, and how it represents decisions made along the way in the life of a project
+|  
+* commit 5dcaa4231018ed30af5e546aaf430e2b40fdcdca
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Wed Feb 8 13:37:08 2017 -0500
+| 
+|     Notes from Branching
+|  
+* commit e4d829541b338c19042c5c3812c210f2be6b589a
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Wed Feb 8 13:28:46 2017 -0500
+| 
+|     Beginning of new CSS retructure
+|  
+* commit 9a56bc3ae6eaa5a0ec52d0b680d19b49f97a0178
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Wed Feb 8 13:25:50 2017 -0500
+| 
+|     We branched here
+|  
+* commit 6d16819556ffc373629c784ffa16eb07b6ee3cae
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 15:25:57 2017 -0500
+| 
+|     Updates to file go to bottom of file.
+|  
+* commit 7d14a0dabe149aa9ea6a7d09b349ef9cd1fe35f4
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 15:23:11 2017 -0500
+| 
+|     Added code to py file
+|  
+* commit 04ad6e69e7927ce0b2a71222aebe5faef0102696
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 15:15:49 2017 -0500
+| 
+|     Attempting to write and add code from command line
+|  
+* commit f61fb7f5a858750325aad09f32f4b653d86f53d7
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 14:36:03 2017 -0500
+| 
+|     Updated README
+|  
+* commit 6a2bec50fda43a0ffcf96ed786e850a628da302f
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 14:27:01 2017 -0500
+| 
+|     Used dash A
+|  
+* commit c86e700ff477d6ae1449df323f1c5f712de82cca
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 14:24:07 2017 -0500
+| 
+|     Staging Exercise
+|  
+* commit 57d647503d8b8dd94dd165a2b35f5efe7bed87ea
+  Author: phroiland <jon.froiland@gmail.com>
+  Date:   Tue Feb 7 14:18:00 2017 -0500
+  
+      Personal Notes on Git
+ ESCOD
+|     Overview of Git history, and how it represents decisions made along the way in the life of a project
+|  
+* commit 5dcaa4231018ed30af5e546aaf430e2b40fdcdca
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Wed Feb 8 13:37:08 2017 -0500
+| 
+|     Notes from Branching
+|  
+* commit e4d829541b338c19042c5c3812c210f2be6b589a
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Wed Feb 8 13:28:46 2017 -0500
+| 
+|     Beginning of new CSS retructure
+|  
+* commit 9a56bc3ae6eaa5a0ec52d0b680d19b49f97a0178
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Wed Feb 8 13:25:50 2017 -0500
+| 
+|     We branched here
+|  
+* commit 6d16819556ffc373629c784ffa16eb07b6ee3cae
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 15:25:57 2017 -0500
+| 
+|     Updates to file go to bottom of file.
+|  
+* commit 7d14a0dabe149aa9ea6a7d09b349ef9cd1fe35f4
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 15:23:11 2017 -0500
+| 
+|     Added code to py file
+|  
+* commit 04ad6e69e7927ce0b2a71222aebe5faef0102696
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 15:15:49 2017 -0500
+| 
+|     Attempting to write and add code from command line
+|  
+* commit f61fb7f5a858750325aad09f32f4b653d86f53d7
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 14:36:03 2017 -0500
+| 
+|     Updated README
+|  
+* commit 6a2bec50fda43a0ffcf96ed786e850a628da302f
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 14:27:01 2017 -0500
+| 
+|     Used dash A
+|  
+* commit c86e700ff477d6ae1449df323f1c5f712de82cca
+| Author: phroiland <jon.froiland@gmail.com>
+| Date:   Tue Feb 7 14:24:07 2017 -0500
+| 
+|     Staging Exercise
+|  
+* commit 57d647503d8b8dd94dd165a2b35f5efe7bed87ea
+  Author: phroiland <jon.froiland@gmail.com>
+  Date:   Tue Feb 7 14:18:00 2017 -0500
+  
+      Personal Notes on Git
+C02S81V1G8WM:future johnfroiland$ cd packt
+-bash: cd: packt: No such file or directory
+C02S81V1G8WM:future johnfroiland$ git checkout master
+M	branching.txt
+Switched to branch 'master'
+C02S81V1G8WM:future johnfroiland$ touch commitMessage.txt
+touch: commitMessage.txt: No such file or directory
+C02S81V1G8WM:future johnfroiland$ cd ..
+C02S81V1G8WM:packt johnfroiland$ git checkout master
+M	branching.txt
+Already on 'master'
+C02S81V1G8WM:packt johnfroiland$ touch commitMessage.txt
+C02S81V1G8WM:packt johnfroiland$ git add commitMessge.txt
+fatal: pathspec 'commitMessge.txt' did not match any files
+C02S81V1G8WM:packt johnfroiland$ git add commitMessage.txt
+C02S81V1G8WM:packt johnfroiland$ git status -sb
+## master
+ M branching.txt
+A  commitMessage.txt
+?? explore/
+C02S81V1G8WM:packt johnfroiland$ git commit -m "Added the commit message file"
+[master ae6886c] Added the commit message file
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 commitMessage.txt
+C02S81V1G8WM:packt johnfroiland$ echo "The commit message is your oppurtunity to ..." >> commitMessage.txt
+C02S81V1G8WM:packt johnfroiland$ git add commitMessage.txt 
+C02S81V1G8WM:packt johnfroiland$ git commit -m " Made changes"
+[master 8a126f5]  Made changes
+ 1 file changed, 1 insertion(+)
+C02S81V1G8WM:packt johnfroiland$ git log -n2
+commit 8a126f5f7f8cc1cbdf889a3ae953a117aa7e0365
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Wed Feb 8 14:03:11 2017 -0500
+
+     Made changes
+
+commit ae6886c77a3f1c2f857b7d133c3cfffcb1b737b9
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Wed Feb 8 14:02:18 2017 -0500
+
+    Added the commit message file
+C02S81V1G8WM:packt johnfroiland$ git dif
+git: 'dif' is not a git command. See 'git --help'.
+
+Did you mean one of these?
+	diff
+	config
+	difftool
+	init
+C02S81V1G8WM:packt johnfroiland$ git diff
+diff --git a/branching.txt b/branching.txt
+index c2fd5fa..6a52bc9 100644
+--- a/branching.txt
++++ b/branching.txt
+@@ -1 +1,3 @@
+ Exploring the Feature Branch
++
++Some text
+C02S81V1G8WM:packt johnfroiland$ git diff 8a..ae
+fatal: ambiguous argument '8a..ae': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+C02S81V1G8WM:packt johnfroiland$ git diff 8a126f..ae6886
+diff --git a/commitMessage.txt b/commitMessage.txt
+index b2f56df..e69de29 100644
+--- a/commitMessage.txt
++++ b/commitMessage.txt
+@@ -1 +0,0 @@
+-The commit message is your oppurtunity to ...
+C02S81V1G8WM:packt johnfroiland$ git reset commitMessage.txt 
+Unstaged changes after reset:
+M	branching.txt
+C02S81V1G8WM:packt johnfroiland$ echo 'body { padding: none; margin: none; }' >> default.css
+C02S81V1G8WM:packt johnfroiland$ echo '#post.div { width: 50%; }' >> posts.css
+C02S81V1G8WM:packt johnfroiland$ echo '<html><body><h1>Git Tracks Changes</h1><div id="posts"></div></body></html> >> simple.html
+> '
+<html><body><h1>Git Tracks Changes</h1><div id="posts"></div></body></html> >> simple.html
+
+C02S81V1G8WM:packt johnfroiland$ echo '<html><body><h1>Git Tracks Changes</h1><div id="posts"></div></body></html> >> simple.html'
+<html><body><h1>Git Tracks Changes</h1><div id="posts"></div></body></html> >> simple.html
+C02S81V1G8WM:packt johnfroiland$ git add simple.html
+fatal: pathspec 'simple.html' did not match any files
+C02S81V1G8WM:packt johnfroiland$ echo '<html><body><h1>Git Tracks Changes</h1><div id="posts"></div></body></html> >> simple.html'
+<html><body><h1>Git Tracks Changes</h1><div id="posts"></div></body></html> >> simple.html
+C02S81V1G8WM:packt johnfroiland$ git add simple.html
+fatal: pathspec 'simple.html' did not match any files
+C02S81V1G8WM:packt johnfroiland$ ls
+README			changedFile		deletedFile		posts.css
+addedFile		commitMessage.txt	explore			testCode.py
+branching.txt		default.css		packt
+C02S81V1G8WM:packt johnfroiland$ echo '<html><body><h1>Git Tracks Changes</h1><div id="posts"></div></body></html> >> sample.html'
+<html><body><h1>Git Tracks Changes</h1><div id="posts"></div></body></html> >> sample.html
+C02S81V1G8WM:packt johnfroiland$ git add sample.html
+fatal: pathspec 'sample.html' did not match any files
+C02S81V1G8WM:packt johnfroiland$ touch simple.html
+C02S81V1G8WM:packt johnfroiland$ echo '<html><body><h1>Git Tracks Changes</h1><div id="posts"></div></body></html> >> sample.html'
+<html><body><h1>Git Tracks Changes</h1><div id="posts"></div></body></html> >> sample.html
+C02S81V1G8WM:packt johnfroiland$ echo '<html><body><h1>Git Tracks Changes</h1><div id="posts"></div></body></html>' >> simple.html
+C02S81V1G8WM:packt johnfroiland$ git add simple.html
+C02S81V1G8WM:packt johnfroiland$ git status -sb
+## master
+ M branching.txt
+A  simple.html
+?? default.css
+?? explore/
+?? posts.css
+C02S81V1G8WM:packt johnfroiland$ git commit
+[master ecb5c0b] Build HTML file for the POSTS page
+ 1 file changed, 1 insertion(+)
+ create mode 100644 simple.html
+C02S81V1G8WM:packt johnfroiland$ cd future
+-bash: cd: future: No such file or directory
+C02S81V1G8WM:packt johnfroiland$ ls
+README			changedFile		deletedFile		posts.css
+addedFile		commitMessage.txt	explore			simple.html
+branching.txt		default.css		packt			testCode.py
+C02S81V1G8WM:packt johnfroiland$ cd packt
+C02S81V1G8WM:packt johnfroiland$ cd fu
+-bash: cd: fu: No such file or directory
+C02S81V1G8WM:packt johnfroiland$ ls
+C02S81V1G8WM:packt johnfroiland$ cd
+C02S81V1G8WM:~ johnfroiland$ cd packt/
+C02S81V1G8WM:packt johnfroiland$ ls
+README			changedFile		deletedFile		posts.css
+addedFile		commitMessage.txt	explore			simple.html
+branching.txt		default.css		packt			testCode.py
+C02S81V1G8WM:packt johnfroiland$ ls
+README			changedFile		deletedFile		posts.css
+addedFile		commitMessage.txt	explore			simple.html
+branching.txt		default.css		packt			testCode.py
+C02S81V1G8WM:packt johnfroiland$ cd packt
+C02S81V1G8WM:packt johnfroiland$ ls
+C02S81V1G8WM:packt johnfroiland$ cd
+C02S81V1G8WM:~ johnfroiland$ cd packt/
+C02S81V1G8WM:packt johnfroiland$ ls
+README			changedFile		deletedFile		posts.css
+addedFile		commitMessage.txt	explore			simple.html
+branching.txt		default.css		packt			testCode.py
+C02S81V1G8WM:packt johnfroiland$ git push
+fatal: The current branch master has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin master
+
+C02S81V1G8WM:packt johnfroiland$ git push https://github.com/phroiland/packt.git
+Counting objects: 10, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (10/10), 1021 bytes | 0 bytes/s, done.
+Total 10 (delta 4), reused 0 (delta 0)
+remote: Resolving deltas: 100% (4/4), completed with 1 local objects.
+To https://github.com/phroiland/packt.git
+ * [new branch]      master -> master
+C02S81V1G8WM:packt johnfroiland$ mkdir reset
+C02S81V1G8WM:packt johnfroiland$ cd reset
+C02S81V1G8WM:reset johnfroiland$ echo "A new file" >> mistake.txt
+C02S81V1G8WM:reset johnfroiland$ git add mistake.txt
+C02S81V1G8WM:reset johnfroiland$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   mistake.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   ../branching.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	../default.css
+	../explore/
+	../posts.css
+
+C02S81V1G8WM:reset johnfroiland$ git reset
+Unstaged changes after reset:
+M	branching.txt
+C02S81V1G8WM:reset johnfroiland$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   ../branching.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	../default.css
+	../explore/
+	../posts.css
+	./
+
+no changes added to commit (use "git add" and/or "git commit -a")
+C02S81V1G8WM:reset johnfroiland$ git log
+commit ecb5c0b0bc1ec28d9a17ac6e74c20cae736f9f9f
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Wed Feb 8 14:10:00 2017 -0500
+
+    Build HTML file for the POSTS page
+
+commit 8a126f5f7f8cc1cbdf889a3ae953a117aa7e0365
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Wed Feb 8 14:03:11 2017 -0500
+
+     Made changes
+
+commit ae6886c77a3f1c2f857b7d133c3cfffcb1b737b9
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Wed Feb 8 14:02:18 2017 -0500
+
+    Added the commit message file
+
+commit f6c93f3d0cd65130929b8f0f4f448a36736104c6
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Wed Feb 8 13:32:10 2017 -0500
+
+    Completed hotfix
+
+commit 9a56bc3ae6eaa5a0ec52d0b680d19b49f97a0178
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Wed Feb 8 13:25:50 2017 -0500
+
+    We branched here
+
+commit 6d16819556ffc373629c784ffa16eb07b6ee3cae
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 15:25:57 2017 -0500
+
+    Updates to file go to bottom of file.
+
+commit 7d14a0dabe149aa9ea6a7d09b349ef9cd1fe35f4
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 15:23:11 2017 -0500
+
+    Added code to py file
+
+commit 04ad6e69e7927ce0b2a71222aebe5faef0102696
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 15:15:49 2017 -0500
+
+    Attempting to write and add code from command line
+
+commit f61fb7f5a858750325aad09f32f4b653d86f53d7
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 14:36:03 2017 -0500
+
+    Updated README
+
+commit 6a2bec50fda43a0ffcf96ed786e850a628da302f
+Author: phroiland <jon.froiland@gmail.com>
+Date:   Tue Feb 7 14:27:01 2017 -0500
+
+    Used dash A
+
+commit c86e700ff477d6ae1449df323f1c5f712de82cca
+Author: phroiland <jon.froiland@gmail.com>
+C02S81V1G8WM:reset johnfroiland$ git reset --hard 102700
+fatal: ambiguous argument '102700': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+C02S81V1G8WM:reset johnfroiland$ git log --all --decorate --oneline
+ecb5c0b (HEAD -> master) Build HTML file for the POSTS page
+8a126f5  Made changes
+ae6886c Added the commit message file
+deabb4b (newUI) Overview of Git history, and how it represents decisions made along the way in the life of a project
+5dcaa42 Notes from Branching
+f6c93f3 Completed hotfix
+e4d8295 Beginning of new CSS retructure
+9a56bc3 We branched here
+6d16819 Updates to file go to bottom of file.
+7d14a0d Added code to py file
+04ad6e6 Attempting to write and add code from command line
+f61fb7f Updated README
+6a2bec5 Used dash A
+c86e700 Staging Exercise
+57d6475 Personal Notes on Git
+C02S81V1G8WM:reset johnfroiland$ git reflog
+ecb5c0b HEAD@{0}: reset: moving to HEAD
+ecb5c0b HEAD@{1}: commit: Build HTML file for the POSTS page
+8a126f5 HEAD@{2}: commit: Made changes
+ae6886c HEAD@{3}: commit: Added the commit message file
+f6c93f3 HEAD@{4}: checkout: moving from master to master
+f6c93f3 HEAD@{5}: checkout: moving from newUI to master
+deabb4b HEAD@{6}: commit: Overview of Git history, and how it represents decisions made along the way in the life of a project
+5dcaa42 HEAD@{7}: commit: Notes from Branching
+e4d8295 HEAD@{8}: checkout: moving from master to newUI
+f6c93f3 HEAD@{9}: merge hotfix: Fast-forward
+9a56bc3 HEAD@{10}: checkout: moving from hotfix to master
+f6c93f3 HEAD@{11}: commit: Completed hotfix
+9a56bc3 HEAD@{12}: checkout: moving from master to hotfix
+9a56bc3 HEAD@{13}: checkout: moving from newUI to master
+e4d8295 HEAD@{14}: commit: Beginning of new CSS retructure
+9a56bc3 HEAD@{15}: checkout: moving from master to newUI
+9a56bc3 HEAD@{16}: commit: We branched here
+6d16819 HEAD@{17}: commit: Updates to file go to bottom of file.
+7d14a0d HEAD@{18}: commit: Added code to py file
+04ad6e6 HEAD@{19}: commit: Attempting to write and add code from command line
+f61fb7f HEAD@{20}: commit: Updated README
+6a2bec5 HEAD@{21}: commit: Used dash A
+c86e700 HEAD@{22}: reset: moving to HEAD
+c86e700 HEAD@{23}: reset: moving to HEAD
+c86e700 HEAD@{24}: commit: Staging Exercise
+57d6475 HEAD@{25}: commit (initial): Personal Notes on Git
+C02S81V1G8WM:reset johnfroiland$ git log --oneline
+ecb5c0b Build HTML file for the POSTS page
+8a126f5  Made changes
+ae6886c Added the commit message file
+f6c93f3 Completed hotfix
+9a56bc3 We branched here
+6d16819 Updates to file go to bottom of file.
+7d14a0d Added code to py file
+04ad6e6 Attempting to write and add code from command line
+f61fb7f Updated README
+6a2bec5 Used dash A
+c86e700 Staging Exercise
+57d6475 Personal Notes on Git
+C02S81V1G8WM:reset johnfroiland$ git log --oneline -g
+ecb5c0b HEAD@{0}: reset: moving to HEAD
+ecb5c0b HEAD@{1}: commit: Build HTML file for the POSTS page
+8a126f5 HEAD@{2}: commit: Made changes
+ae6886c HEAD@{3}: commit: Added the commit message file
+f6c93f3 HEAD@{4}: checkout: moving from master to master
+f6c93f3 HEAD@{5}: checkout: moving from newUI to master
+deabb4b HEAD@{6}: commit: Overview of Git history, and how it represents decisions made along the way in the life of a project
+5dcaa42 HEAD@{7}: commit: Notes from Branching
+e4d8295 HEAD@{8}: checkout: moving from master to newUI
+f6c93f3 HEAD@{9}: merge hotfix: Fast-forward
+9a56bc3 HEAD@{10}: checkout: moving from hotfix to master
+f6c93f3 HEAD@{11}: commit: Completed hotfix
+9a56bc3 HEAD@{12}: checkout: moving from master to hotfix
+9a56bc3 HEAD@{13}: checkout: moving from newUI to master
+e4d8295 HEAD@{14}: commit: Beginning of new CSS retructure
+9a56bc3 HEAD@{15}: checkout: moving from master to newUI
+9a56bc3 HEAD@{16}: commit: We branched here
+6d16819 HEAD@{17}: commit: Updates to file go to bottom of file.
+7d14a0d HEAD@{18}: commit: Added code to py file
+04ad6e6 HEAD@{19}: commit: Attempting to write and add code from command line
+f61fb7f HEAD@{20}: commit: Updated README
+6a2bec5 HEAD@{21}: commit: Used dash A
+c86e700 HEAD@{22}: reset: moving to HEAD
+c86e700 HEAD@{23}: reset: moving to HEAD
+c86e700 HEAD@{24}: commit: Staging Exercise
+57d6475 HEAD@{25}: commit (initial): Personal Notes on Git
+C02S81V1G8WM:reset johnfroiland$ 
+C02S81V1G8WM:reset johnfroiland$ 
+Reset Revert Rebase
+Altering History: 
