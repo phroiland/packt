@@ -1,0 +1,101 @@
+Last login: Wed Feb  8 09:17:47 on ttys000
+C02S81V1G8WM:~ johnfroiland$ cd packt
+C02S81V1G8WM:packt johnfroiland$ git version
+git version 2.10.1 (Apple Git-78)
+C02S81V1G8WM:packt johnfroiland$ ca .git/head
+-bash: ca: command not found
+C02S81V1G8WM:packt johnfroiland$ ca .git/HEAD
+-bash: ca: command not found
+C02S81V1G8WM:packt johnfroiland$ cat .git/HEAD
+ref: refs/heads/master
+C02S81V1G8WM:packt johnfroiland$ cat .git/refs/heads/master
+6d16819556ffc373629c784ffa16eb07b6ee3cae
+C02S81V1G8WM:packt johnfroiland$ echo "Exploring the Feature Branch" >> branching.txt
+C02S81V1G8WM:packt johnfroiland$ git add branching.txt
+C02S81V1G8WM:packt johnfroiland$ git commit -m "We branched here"
+[master 9a56bc3] We branched here
+ 1 file changed, 1 insertion(+)
+ create mode 100644 branching.txt
+C02S81V1G8WM:packt johnfroiland$ git branchnewUI
+git: 'branchnewUI' is not a git command. See 'git --help'.
+C02S81V1G8WM:packt johnfroiland$ git branch newUI
+C02S81V1G8WM:packt johnfroiland$ git branch
+* master
+  newUI
+C02S81V1G8WM:packt johnfroiland$ git checkout newUI
+Switched to branch 'newUI'
+C02S81V1G8WM:packt johnfroiland$ git branch
+  master
+* newUI
+C02S81V1G8WM:packt johnfroiland$  echo 'body { padding: none; margin: none; }' >> default.css
+C02S81V1G8WM:packt johnfroiland$ git add default.css
+C02S81V1G8WM:packt johnfroiland$ git commit -m "Beginning of new CSS retructure"
+[newUI e4d8295] Beginning of new CSS retructure
+ 1 file changed, 1 insertion(+)
+ create mode 100644 default.css
+C02S81V1G8WM:packt johnfroiland$ git checkout master
+Switched to branch 'master'
+C02S81V1G8WM:packt johnfroiland$ git checkout -b hotfix
+Switched to a new branch 'hotfix'
+C02S81V1G8WM:packt johnfroiland$ git branch
+* hotfix
+  master
+  newUI
+C02S81V1G8WM:packt johnfroiland$ vi branching.txt
+C02S81V1G8WM:packt johnfroiland$ git rm git*
+rm 'gitAdd'
+rm 'gitStatus'
+C02S81V1G8WM:packt johnfroiland$ git status -sb
+## hotfix
+ M branching.txt
+D  gitAdd
+D  gitStatus
+?? explore/
+C02S81V1G8WM:packt johnfroiland$ git commit -m "Completed hotfix"
+[hotfix f6c93f3] Completed hotfix
+ 2 files changed, 1 deletion(-)
+ delete mode 100644 gitAdd
+ delete mode 100644 gitStatus
+C02S81V1G8WM:packt johnfroiland$ git checkout
+M	branching.txt
+C02S81V1G8WM:packt johnfroiland$ git checkout master
+M	branching.txt
+Switched to branch 'master'
+C02S81V1G8WM:packt johnfroiland$ git merge hotfix
+Updating 9a56bc3..f6c93f3
+Fast-forward
+ gitAdd    | 0
+ gitStatus | 1 -
+ 2 files changed, 1 deletion(-)
+ delete mode 100644 gitAdd
+ delete mode 100644 gitStatus
+C02S81V1G8WM:packt johnfroiland$ git checkout newUI
+M	branching.txt
+Switched to branch 'newUI'
+C02S81V1G8WM:packt johnfroiland$ git branch -d hotfix
+error: The branch 'hotfix' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D hotfix'.
+C02S81V1G8WM:packt johnfroiland$ git status
+On branch newUI
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   branching.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	explore/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+C02S81V1G8WM:packt johnfroiland$ cat branching.txt
+Exploring the Feature Branch
+
+Some text
+C02S81V1G8WM:packt johnfroiland$ git branch -D hotfix
+Deleted branch hotfix (was f6c93f3).
+C02S81V1G8WM:packt johnfroiland$ mkdir branching
+C02S81V1G8WM:packt johnfroiland$ cd branching
+C02S81V1G8WM:branching johnfroiland$ touch branching.txt
+
